@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - ABB DCS Solutions | 产品中心</title>
+    <style>
+        /* ===== 全局重置 & 变量 (与首页统一) ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-deep: #0a192f;
+            --primary-accent: #d93e44;
+            --primary-accent-light: #ff6b6b;
+            --primary-accent-dark: #b12a30;
+            --bg-light: #f5f9ff;
+            --card-white: #ffffff;
+            --text-dark: #1e2a41;
+            --text-muted: #5b6f88;
+            --shadow-sm: 0 12px 28px -8px rgba(10, 25, 47, 0.08), 0 6px 10px -4px rgba(10, 25, 47, 0.02);
+            --shadow-md: 0 20px 35px -10px rgba(10, 25, 47, 0.12), 0 10px 15px -5px rgba(10, 25, 47, 0.05);
+            --shadow-lg: 0 30px 50px -15px rgba(10, 25, 47, 0.2);
+            --border-radius-card: 20px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-padding-top: 90px;
+        }
+
+        /* ===== 头部导航 (与首页一致) ===== */
+        header {
+            background: rgba(10, 25, 47, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: white;
+            padding: 0.9rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(217, 62, 68, 0.25);
+        }
+
+        .nav {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: #d93e44;
+            text-shadow: 0 2px 8px rgba(217, 62, 68, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            color: #e6f1ff;
+            text-decoration: none;
+            margin-left: 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 0.2rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: var(--primary-accent);
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            background: transparent;
+            border: 1.8px solid var(--primary-accent);
+            color: var(--primary-accent-light);
+            padding: 0.45rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-left: 1.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.3px;
+        }
+
+        .lang-switch:hover {
+            background: var(--primary-accent);
+            color: white;
+            box-shadow: 0 0 15px rgba(217, 62, 68, 0.6);
+            transform: scale(1.02);
+            border-color: var(--primary-accent);
+        }
+
+        /* ===== 主布局容器 ===== */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* ===== 侧边栏 (统一风格) ===== */
+        .sidebar-ac800m,
+        .sidebar-s800io {
+            width: 220px;
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+            background: var(--card-white);
+            padding: 1.8rem 1.2rem;
+            border-radius: 28px;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            display: none;
+            border: 1px solid rgba(217, 62, 68, 0.12);
+            transition: var(--transition);
+        }
+
+        .sidebar-ac800m.show,
+        .sidebar-s800io.show {
+            display: block;
+        }
+
+        .sidebar-ac800m h3,
+        .sidebar-s800io h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--primary-deep);
+            border-bottom: 2px solid var(--primary-accent);
+            padding-bottom: 0.7rem;
+            letter-spacing: -0.01em;
+        }
+
+        .sidebar-ac800m a,
+        .sidebar-s800io a {
+            display: block;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 0.6rem 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 12px;
+            transition: var(--transition);
+            margin-bottom: 0.2rem;
+        }
+
+        .sidebar-ac800m a:hover,
+        .sidebar-s800io a:hover {
+            background: rgba(217, 62, 68, 0.08);
+            color: var(--primary-accent);
+            transform: translateX(5px);
+        }
+
+        /* ===== 内容区 ===== */
+        .content {
+            flex: 1;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--primary-deep);
+            position: relative;
+            letter-spacing: -0.01em;
+        }
+
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-accent), #fda5a5);
+            border-radius: 10px;
+            margin: 0.8rem auto 0;
+        }
+
+        /* ===== 选项卡 (Tabs) ===== */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 2.8rem;
+        }
+
+        .tab {
+            padding: 0.8rem 1.8rem;
+            background: var(--card-white);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(217, 62, 68, 0.1);
+        }
+
+        .tab:hover {
+            background: rgba(217, 62, 68, 0.08);
+            transform: translateY(-2px);
+            border-color: var(--primary-accent-light);
+        }
+
+        .tab.active {
+            background: linear-gradient(145deg, var(--primary-accent-light), var(--primary-accent));
+            color: white;
+            box-shadow: 0 10px 18px -6px rgba(217, 62, 68, 0.4);
+            border-color: transparent;
+        }
+
+        /* ===== 产品网格 ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .sub-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--primary-deep);
+            padding-left: 1rem;
+            border-left: 6px solid var(--primary-accent);
+        }
+
+        .product-item {
+            background: var(--card-white);
+            border-radius: var(--border-radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.02);
+            cursor: pointer;
+        }
+
+        .product-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.02) translateY(-5px);
+            border-color: rgba(217, 62, 68, 0.25);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 170px;
+            object-fit: contain;
+            object-position: center;
+            background: #ffffff;
+            padding: 20px 15px 5px;
+            transition: var(--transition);
+        }
+
+        .product-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .product-info {
+            padding: 1.2rem 1.2rem 1.5rem;
+            background: white;
+            border-top: 1px solid #f0eef2;
+        }
+
+        .product-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            color: var(--primary-deep);
+            font-weight: 700;
+        }
+
+        .product-info h4:last-of-type {
+            font-weight: 500;
+            color: var(--primary-accent-dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .product-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== 分类显示控制 ===== */
+        .category {
+            display: none;
+        }
+        .category.show {
+            display: block;
+        }
+
+        /* ===== 模态框 (图片放大) ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 15, 25, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            background: white;
+            padding: 1rem;
+            border-radius: 24px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+
+        .close {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            color: white;
+            font-size: 3.2rem;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            color: var(--primary-accent-light);
+        }
+
+        /* ===== 页脚 ===== */
+        footer {
+            background: #07121f;
+            color: #b0c7de;
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            font-size: 0.95rem;
+            border-top: 1px solid #4a2e32;
+            margin-top: 3rem;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 1100px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .sidebar-ac800m,
+            .sidebar-s800io {
+                width: 190px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-ac800m,
+            .sidebar-s800io {
+                display: none !important;
+            }
+            .main-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 2rem 1.2rem;
+            }
+            .nav {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.3rem;
+            }
+            .nav-links a {
+                margin: 0 0.6rem;
+                font-size: 0.95rem;
+            }
+            .lang-switch {
+                margin-left: 0.5rem;
+                margin-top: 0.2rem;
+            }
+            .logo {
+                font-size: 1.4rem;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tabs {
+                gap: 0.5rem;
+            }
+            .tab {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 辅助细节 */
+        .certificates {
+            justify-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="logo" data-lang="logo">Tempe (beijing) Technology Co., Ltd.</div>
+        <div class="nav-links">
+            <a href="index.html" data-lang="home">Home</a>
+            <a href="products.html" data-lang="products">Products</a>
+            <a href="index.html#certificates" data-lang="certificates">Certificates</a>
+            <a href="index.html#about" data-lang="about">About Us</a>
+            <a href="index.html#contact" data-lang="contact">Contact</a>
+            <button class="lang-switch" id="langBtn">中文</button>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <!-- AC 800M 侧边栏 -->
+    <div class="sidebar-ac800m" id="sidebarAC800M">
+        <h3 data-lang="quickNav">Quick Navigation</h3>
+        <a href="#cat3-controllers" data-lang="navControllers">Controllers</a>
+        <a href="#cat3-interfaces" data-lang="navInterfaces">Interfaces</a>
+    </div>
+
+    <!-- S800 IO 侧边栏 -->
+    <div class="sidebar-s800io" id="sidebarS800IO">
+        <h3 data-lang="quickNav">Quick Navigation</h3>
+        <a href="#cat4-interfaces" data-lang="navInterfaces">Interfaces</a>
+        <a href="#cat4-iosystems" data-lang="navIOSystems">I/O Systems</a>
+    </div>
+
+    <div class="content">
+        <h2 class="page-title" data-lang="allProducts">All Products</h2>
+        <div class="tabs">
+            <button class="tab active" onclick="show('cat1')" data-lang="cat1">PEC</button>
+            <button class="tab" onclick="show('cat2')" data-lang="cat2">MTU</button>
+            <button class="tab" onclick="show('cat3')" data-lang="cat3">AC 800M</button>
+            <button class="tab" onclick="show('cat4')" data-lang="cat4">S800 IO</button>
+            <button class="tab" onclick="show('cat5')" data-lang="cat5">800F</button>
+            <button class="tab" onclick="show('cat6')" data-lang="cat6">900F</button>
+        </div>
+
+        <!-- 分类内容，图片与文字完全保留原样 -->
+        <div id="cat1" class="category show">
+            <div class="product-grid">
+                <div class="product-item" onclick="openProductModal('assets/images/pec1.jpg')"><img src="assets/images/pec1.jpg" alt="PEC"><div class="product-info"><h4>GF D233</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/pec2.jpg')"><img src="assets/images/pec2.jpg" alt="PEC"><div class="product-info"><h4>PC D230</h4><h4>3BHE022291R0101</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/pec3.jpg')"><img src="assets/images/pec3.jpg" alt="PEC"><div class="product-info"><h4>PC D231 </h4><h4>3BHE025541R0101</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/pec4.jpg')"><img src="assets/images/pec4.jpg" alt="PEC"><div class="product-info"><h4>PC D235 </h4><h4>3BHE032025R0101</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/pec5.jpg')"><img src="assets/images/pec5.jpg" alt="PEC"><div class="product-info"><h4>PP D113 </h4><h4>3BHE023784R1300</h4><p>Original ABB</p></div></div>
+            </div>
+        </div>
+
+        <div id="cat2" class="category">
+            <div class="product-grid">
+               <div class="product-item" onclick="openProductModal('assets/images/mtu1.jpg')"><img src="assets/images/mtu1.jpg" alt="MTU"><div class="product-info"><h4>TU805K01</h4><h4>3BSE035990R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu2.jpg')"><img src="assets/images/mtu2.jpg" alt="MTU"><div class="product-info"><h4>TU810V1</h4><h4>3BSE013230R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu3.jpg')"><img src="assets/images/mtu3.jpg" alt="MTU"><div class="product-info"><h4>TU811V1</h4><h4>3BSE013231R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu4.jpg')"><img src="assets/images/mtu4.jpg" alt="MTU"><div class="product-info"><h4>TU812V1</h4><h4>3BSE013232R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu5.jpg')"><img src="assets/images/mtu5.jpg" alt="MTU"><div class="product-info"><h4>TU813</h4><h4>3BSE036714R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu6.jpg')"><img src="assets/images/mtu6.jpg" alt="MTU"><div class="product-info"><h4>TU814V1</h4><h4>3BSE013233R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu7.jpg')"><img src="assets/images/mtu7.jpg" alt="MTU"><div class="product-info"><h4>TU818</h4><h4>3BSE069209R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu8.jpg')"><img src="assets/images/mtu8.jpg" alt="MTU"><div class="product-info"><h4>TU819</h4><h4>3BSE068891R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu9.jpg')"><img src="assets/images/mtu9.jpg" alt="MTU"><div class="product-info"><h4>TU830V1</h4><h4>3BSE013234R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu10.jpg')"><img src="assets/images/mtu10.jpg" alt="MTU"><div class="product-info"><h4>TU831V1</h4><h4>3BSE013235R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu11.jpg')"><img src="assets/images/mtu11.jpg" alt="MTU"><div class="product-info"><h4>TU833</h4><h4>3BSE038726R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu12.jpg')"><img src="assets/images/mtu12.jpg" alt="MTU"><div class="product-info"><h4>TU834</h4><h4>3BSE040364R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu13.jpg')"><img src="assets/images/mtu13.jpg" alt="MTU"><div class="product-info"><h4>TU835V1</h4><h4>3BSE013236R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu14.jpg')"><img src="assets/images/mtu14.jpg" alt="MTU"><div class="product-info"><h4>TU836V1</h4><h4>3BSE013237R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu15.jpg')"><img src="assets/images/mtu15.jpg" alt="MTU"><div class="product-info"><h4>TU837V1</h4><h4>3BSE013238R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu16.jpg')"><img src="assets/images/mtu16.jpg" alt="MTU"><div class="product-info"><h4>TU838</h4><h4>3BSE008572R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu17.jpg')"><img src="assets/images/mtu17.jpg" alt="MTU"><div class="product-info"><h4>TU839</h4><h4>3BSE046966R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu18.jpg')"><img src="assets/images/mtu18.jpg" alt="MTU"><div class="product-info"><h4>TU842</h4><h4>3BSE020850R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu19.jpg')"><img src="assets/images/mtu19.jpg" alt="MTU"><div class="product-info"><h4>TU843</h4><h4>3BSE021443R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu20.jpg')"><img src="assets/images/mtu20.jpg" alt="MTU"><div class="product-info"><h4>TU844</h4><h4>3BSE021445R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu21.jpg')"><img src="assets/images/mtu21.jpg" alt="MTU"><div class="product-info"><h4>TU845</h4><h4>3BSE021447R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu22.jpg')"><img src="assets/images/mtu22.jpg" alt="MTU"><div class="product-info"><h4>TU850</h4><h4>3BSE050930R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu23.jpg')"><img src="assets/images/mtu23.jpg" alt="MTU"><div class="product-info"><h4>TU851</h4><h4>3BSE068782R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu24.jpg')"><img src="assets/images/mtu24.jpg" alt="MTU"><div class="product-info"><h4>TU852</h4><h4>3BSE069964R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu25.jpg')"><img src="assets/images/mtu25.jpg" alt="MTU"><div class="product-info"><h4>TU854</h4><h4>3BSE069966R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu26.jpg')"><img src="assets/images/mtu26.jpg" alt="MTU"><div class="product-info"><h4>TU890</h4><h4>3BSC690075R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/mtu27.jpg')"><img src="assets/images/mtu27.jpg" alt="MTU"><div class="product-info"><h4>TU891</h4><h4>3BSC840157R1</h4><p>Original ABB</p></div></div>
+
+
+
+            </div>
+        </div>
+
+        <!-- AC 800M -->
+        <div id="cat3" class="category">
+            <h3 class="sub-title" id="cat3-controllers" data-lang="titleControllers">Controllers</h3>
+            <div class="product-grid">
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM851K01</h4><h4>3BSE018168R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM851AK01</h4><h4>3BSE066485R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM856AK01</h4><h4>3BSE066490R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM857K01</h4><h4>3BSE088385R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM857K02</h4><h4>3BSE088386R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM858K01</h4><h4>3BSE082895R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM858K02</h4><h4>3BSE082896R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM860AK01</h4><h4>3BSE066495R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM861AK01</h4><h4>3BSE018157R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM862K01</h4><h4>3BSE076940R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM862K02</h4><h4>3BSE081636R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM863K01</h4><h4>3BSE088381R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM863K02</h4><h4>3BSE088382R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM864AK01</h4><h4>3BSE018161R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM864AK02</h4><h4>3BSE018164R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM866K01</h4><h4>3BSE050198R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM866AK01</h4><h4>3BSE076939R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM866AK02</h4><h4>3BSE081637R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-1.jpg')"><img src="assets/images/AC 800M-1.jpg" alt="AC 800M"><div class="product-info"><h4>PM867K01</h4><h4>3BSE076355R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-2.jpg')"><img src="assets/images/AC 800M-2.jpg" alt="AC 800M"><div class="product-info"><h4>PM867K02</h4><h4>3BSE081638R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-3.jpg')"><img src="assets/images/AC 800M-3.jpg" alt="AC 800M"><div class="product-info"><h4>PM891K01</h4><h4>3BSE053241R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-4.jpg')"><img src="assets/images/AC 800M-4.jpg" alt="AC 800M"><div class="product-info"><h4>PM891K02</h4><h4>3BSE053242R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-5.jpg')"><img src="assets/images/AC 800M-5.jpg" alt="AC 800M"><div class="product-info"><h4>SB822</h4><h4>3BSE018172R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-6.jpg')"><img src="assets/images/AC 800M-6.jpg" alt="AC 800M"><div class="product-info"><h4>SM812K01</h4><h4>3BSE072270R1</h4><p>Original ABB</p></div></div>
+            <div class="product-item" onclick="openProductModal('assets/images/AC 800M-7.jpg')"><img src="assets/images/AC 800M-7.jpg" alt="AC 800M"><div class="product-info"><h4>BC810K02</h4><h4>3BSE031155R1</h4><p>Original ABB</p></div></div>
+             <div class="product-item" onclick="openProductModal('assets/images/AC 800M-8.jpg')"><img src="assets/images/AC 800M-8.jpg" alt="AC 800M"><div class="product-info"><h4>BC820K02</h4><h4>3BSE071500R1</h4><p>Original ABB</p></div></div>   
+              <div class="product-item" onclick="openProductModal('assets/images/AC 800M-9.jpg')"><img src="assets/images/AC 800M-9.jpg" alt="AC 800M"><div class="product-info"><h4>CompactFlash Card 4GB</h4><h4>2PAA121688R1</h4><p>Original ABB</p></div></div>
+
+
+
+
+            </div>
+
+            <h3 class="sub-title" id="cat3-interfaces" data-lang="titleInterfaces">Interfaces</h3>
+            <div class="product-grid">
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-10.jpg')"><img src="assets/images/AC 800M-10.jpg" alt="AC 800M"><div class="product-info"><h4>CI853K01</h4><h4>3BSE018103R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-11.jpg')"><img src="assets/images/AC 800M-11.jpg" alt="AC 800M"><div class="product-info"><h4>CI854AK01</h4><h4>3BSE030220R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-11.jpg')"><img src="assets/images/AC 800M-11.jpg" alt="AC 800M"><div class="product-info"><h4>CI854BK01</h4><h4>3BSE069449R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-12.jpg')"><img src="assets/images/AC 800M-12.jpg" alt="AC 800M"><div class="product-info"><h4>CI855K01</h4><h4>3BSE018106R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-13.jpg')"><img src="assets/images/AC 800M-13.jpg" alt="AC 800M"><div class="product-info"><h4>CI856K01</h4><h4>3BSE026055R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-14.jpg')"><img src="assets/images/AC 800M-14.jpg" alt="AC 800M"><div class="product-info"><h4>CI857K01</h4><h4>3BSE018144R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-15.jpg')"><img src="assets/images/AC 800M-15.jpg" alt="AC 800M"><div class="product-info"><h4>CI858K01</h4><h4>3BSE018135R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-16.jpg')"><img src="assets/images/AC 800M-16.jpg" alt="AC 800M"><div class="product-info"><h4>CI860K01</h4><h4>3BSE032444R1</h4><p>Original ABB</p></div></div>
+                 <div class="product-item" onclick="openProductModal('assets/images/AC 800M-17.jpg')"><img src="assets/images/AC 800M-17.jpg" alt="AC 800M"><div class="product-info"><h4>CI862K01</h4><h4>3BUA000037R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-18.jpg')"><img src="assets/images/AC 800M-18.jpg" alt="AC 800M"><div class="product-info"><h4>CI865K01</h4><h4>3BSE040795R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-19.jpg')"><img src="assets/images/AC 800M-19.jpg" alt="AC 800M"><div class="product-info"><h4>CI867AK01</h4><h4>3BSE092689R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-20.jpg')"><img src="assets/images/AC 800M-20.jpg" alt="AC 800M"><div class="product-info"><h4>CI868K01</h4><h4>3BSE048845R1</h4><p>Original ABB</p></div></div>  
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-20.jpg')"><img src="assets/images/AC 800M-20.jpg" alt="AC 800M"><div class="product-info"><h4>CI868AK01</h4><h4>3BSE092691R1</h4><p>Original ABB</p></div></div>  
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-21.jpg')"><img src="assets/images/AC 800M-21.jpg" alt="AC 800M"><div class="product-info"><h4>CI869K01</h4><h4>3BSE049110R1</h4><p>Original ABB</p></div></div>  
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-22.jpg')"><img src="assets/images/AC 800M-22.jpg" alt="AC 800M"><div class="product-info"><h4>CI871AK01</h4><h4>3BSE092693R1</h4><p>Original ABB</p></div></div>  
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-22.jpg')"><img src="assets/images/AC 800M-22.jpg" alt="AC 800M"><div class="product-info"><h4>CI873AK01</h4><h4>3BSE092695R1</h4><p>Original ABB</p></div></div>  
+                <div class="product-item" onclick="openProductModal('assets/images/AC 800M-22.jpg')"><img src="assets/images/AC 800M-22.jpg" alt="AC 800M"><div class="product-info"><h4>CI874K01</h4><h4>3BSE090784R1</h4><p>Original ABB</p></div></div>  
+
+
+
+            </div>
+        </div>
+
+        <!-- S800 IO -->
+        <div id="cat4" class="category">
+            <h3 class="sub-title" id="cat4-interfaces" data-lang="titleInterfaces">Interfaces</h3>
+            <div class="product-grid">
+                <div class="product-item" onclick="openProductModal('assets/images/s800io-1.jpg')"><img src="assets/images/s800io-1.jpg" alt="S800 IO"><div class="product-info"><h4>CI801</h4><h4>3BSE022366R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-2.jpg')"><img src="assets/images/s800io-2.jpg" alt="S800 IO"><div class="product-info"><h4>CI840A</h4><h4>3BSE041882R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-3.jpg')"><img src="assets/images/s800io-3.jpg" alt="S800 IO"><div class="product-info"><h4>TU846</h4><h4>3BSE022460R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-4.jpg')"><img src="assets/images/s800io-4.jpg" alt="S800 IO"><div class="product-info"><h4>TU847</h4><h4>3BSE022462R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-5.jpg')"><img src="assets/images/s800io-5.jpg" alt="S800 IO"><div class="product-info"><h4>TB820V2</h4><h4>3BSE013208R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-6.jpg')"><img src="assets/images/s800io-6.jpg" alt="S800 IO"><div class="product-info"><h4>TB825</h4><h4>3BSE036634R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-7.jpg')"><img src="assets/images/s800io-7.jpg" alt="S800 IO"><div class="product-info"><h4>TB826</h4><h4>3BSE061637R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-8.jpg')"><img src="assets/images/s800io-8.jpg" alt="S800 IO"><div class="product-info"><h4>TB840A</h4><h4>3BSE037760R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-9.jpg')"><img src="assets/images/s800io-9.jpg" alt="S800 IO"><div class="product-info"><h4>TB842</h4><h4>3BSE022464R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-10.jpg')"><img src="assets/images/s800io-10.jpg" alt="S800 IO"><div class="product-info"><h4>TU807</h4><h4>3BSE039025R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-11.jpg')"><img src="assets/images/s800io-11.jpg" alt="S800 IO"><div class="product-info"><h4>TU840</h4><h4>3BSE020846R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-11.jpg')"><img src="assets/images/s800io-11.jpg" alt="S800 IO"><div class="product-info"><h4>TU841</h4><h4>3BSE020848R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-12.jpg')"><img src="assets/images/s800io-12.jpg" alt="S800 IO"><div class="product-info"><h4>TU848</h4><h4>3BSE042558R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-13.jpg')"><img src="assets/images/s800io-13.jpg" alt="S800 IO"><div class="product-info"><h4>TU849</h4><h4>3BSE042560R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-14.jpg')"><img src="assets/images/s800io-14.jpg" alt="S800 IO"><div class="product-info"><h4>CI845</h4><h4>3BSE075853R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-15.jpg')"><img src="assets/images/s800io-15.jpg" alt="S800 IO"><div class="product-info"><h4>TC810</h4><h4>3BSE076220R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-16.jpg')"><img src="assets/images/s800io-16.jpg" alt="S800 IO"><div class="product-info"><h4>TC811</h4><h4>3BSE078714R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-17.jpg')"><img src="assets/images/s800io-17.jpg" alt="S800 IO"><div class="product-info"><h4>TU860</h4><h4>3BSE078710R1</h4><p>Original ABB</p></div></div>
+
+
+
+
+
+            </div>
+
+            <h3 class="sub-title" id="cat4-iosystems" data-lang="titleIOSystems">I/O Systems</h3>
+            <div class="product-grid">
+<div class="product-item" onclick="openProductModal('assets/images/s800io-18.jpg')"><img src="assets/images/s800io-18.jpg" alt="S800 IO"><div class="product-info"><h4>AI801</h4><h4>3BSE020512R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-19.jpg')"><img src="assets/images/s800io-19.jpg" alt="S800 IO"><div class="product-info"><h4>AO801</h4><h4>3BSE020514R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-20.jpg')"><img src="assets/images/s800io-20.jpg" alt="S800 IO"><div class="product-info"><h4>DI801</h4><h4>3BSE020508R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-21.jpg')"><img src="assets/images/s800io-21.jpg" alt="S800 IO"><div class="product-info"><h4>DI802</h4><h4>3BSE022360R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-22.jpg')"><img src="assets/images/s800io-22.jpg" alt="S800 IO"><div class="product-info"><h4>DI803</h4><h4>3BSE022362R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-23.jpg')"><img src="assets/images/s800io-23.jpg" alt="S800 IO"><div class="product-info"><h4>DO801</h4><h4>3BSE020510R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-24.jpg')"><img src="assets/images/s800io-24.jpg" alt="S800 IO"><div class="product-info"><h4>DO802</h4><h4>3BSE022364R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-25.jpg')"><img src="assets/images/s800io-25.jpg" alt="S800 IO"><div class="product-info"><h4>AI810</h4><h4>3BSE008516R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-26.jpg')"><img src="assets/images/s800io-26.jpg" alt="S800 IO"><div class="product-info"><h4>AI815</h4><h4>3BSE052604R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-27.jpg')"><img src="assets/images/s800io-27.jpg" alt="S800 IO"><div class="product-info"><h4>AI820</h4><h4>3BSE008544R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-28.jpg')"><img src="assets/images/s800io-28.jpg" alt="S800 IO"><div class="product-info"><h4>AI825</h4><h4>3BSE036456R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-29.jpg')"><img src="assets/images/s800io-29.jpg" alt="S800 IO"><div class="product-info"><h4>AI830A</h4><h4>3BSE040662R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-30.jpg')"><img src="assets/images/s800io-30.jpg" alt="S800 IO"><div class="product-info"><h4>AI835A</h4><h4>3BSE051306R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-31.jpg')"><img src="assets/images/s800io-31.jpg" alt="S800 IO"><div class="product-info"><h4>AI843</h4><h4>3BSE028925R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-32.jpg')"><img src="assets/images/s800io-32.jpg" alt="S800 IO"><div class="product-info"><h4>AI845</h4><h4>3BSE023675R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-33.jpg')"><img src="assets/images/s800io-33.jpg" alt="S800 IO"><div class="product-info"><h4>AI880A</h4><h4>3BSE039293R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-34.jpg')"><img src="assets/images/s800io-34.jpg" alt="S800 IO"><div class="product-info"><h4>AI890</h4><h4>3BSC690071R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-35.jpg')"><img src="assets/images/s800io-35.jpg" alt="S800 IO"><div class="product-info"><h4>AI893</h4><h4>3BSC690141R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-36.jpg')"><img src="assets/images/s800io-36.jpg" alt="S800 IO"><div class="product-info"><h4>AI895</h4><h4>3BSC690086R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-37.jpg')"><img src="assets/images/s800io-37.jpg" alt="S800 IO"><div class="product-info"><h4>AO810V2</h4><h4>3BSE038415R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-38.jpg')"><img src="assets/images/s800io-38.jpg" alt="S800 IO"><div class="product-info"><h4>AO815</h4><h4>3BSE052605R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-39.jpg')"><img src="assets/images/s800io-39.jpg" alt="S800 IO"><div class="product-info"><h4>AO820</h4><h4>3BSE008546R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-40.jpg')"><img src="assets/images/s800io-40.jpg" alt="S800 IO"><div class="product-info"><h4>AO845A</h4><h4>3BSE045584R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-41.jpg')"><img src="assets/images/s800io-41.jpg" alt="S800 IO"><div class="product-info"><h4>AO890</h4><h4>3BSC690072R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-42.jpg')"><img src="assets/images/s800io-42.jpg" alt="S800 IO"><div class="product-info"><h4>AO895</h4><h4>3BSC690087R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-43.jpg')"><img src="assets/images/s800io-43.jpg" alt="S800 IO"><div class="product-info"><h4>DI810</h4><h4>3BSE008508R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-44.jpg')"><img src="assets/images/s800io-44.jpg" alt="S800 IO"><div class="product-info"><h4>DI811</h4><h4>3BSE008552R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-45.jpg')"><img src="assets/images/s800io-45.jpg" alt="S800 IO"><div class="product-info"><h4>DI814</h4><h4>3BUR001454R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-46.jpg')"><img src="assets/images/s800io-46.jpg" alt="S800 IO"><div class="product-info"><h4>DI818</h4><h4>3BSE069052R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-47.jpg')"><img src="assets/images/s800io-47.jpg" alt="S800 IO"><div class="product-info"><h4>DI820</h4><h4>3BSE008512R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-48.jpg')"><img src="assets/images/s800io-48.jpg" alt="S800 IO"><div class="product-info"><h4>DI821</h4><h4>3BSE008550R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-49.jpg')"><img src="assets/images/s800io-49.jpg" alt="S800 IO"><div class="product-info"><h4>DI825</h4><h4>3BSE036373R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-50.jpg')"><img src="assets/images/s800io-50.jpg" alt="S800 IO"><div class="product-info"><h4>DI828</h4><h4>3BSE069054R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-51.jpg')"><img src="assets/images/s800io-51.jpg" alt="S800 IO"><div class="product-info"><h4>DI830</h4><h4>3BSE013210R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-52.jpg')"><img src="assets/images/s800io-52.jpg" alt="S800 IO"><div class="product-info"><h4>DI831</h4><h4>3BSE013212R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-53.jpg')"><img src="assets/images/s800io-53.jpg" alt="S800 IO"><div class="product-info"><h4>DI840</h4><h4>3BSE020836R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-54.jpg')"><img src="assets/images/s800io-54.jpg" alt="S800 IO"><div class="product-info"><h4>DI880</h4><h4>3BSE028586R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-55.jpg')"><img src="assets/images/s800io-55.jpg" alt="S800 IO"><div class="product-info"><h4>DI890</h4><h4>3BSC690073R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-56.jpg')"><img src="assets/images/s800io-56.jpg" alt="S800 IO"><div class="product-info"><h4>DO810</h4><h4>3BSE008510R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-57.jpg')"><img src="assets/images/s800io-57.jpg" alt="S800 IO"><div class="product-info"><h4>DO814</h4><h4>3BUR001455R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-58.jpg')"><img src="assets/images/s800io-58.jpg" alt="S800 IO"><div class="product-info"><h4>DO815</h4><h4>3BSE013258R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-59.jpg')"><img src="assets/images/s800io-59.jpg" alt="S800 IO"><div class="product-info"><h4>DO818</h4><h4>3BSE069053R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-60.jpg')"><img src="assets/images/s800io-60.jpg" alt="S800 IO"><div class="product-info"><h4>DO820</h4><h4>3BSE008514R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-61.jpg')"><img src="assets/images/s800io-61.jpg" alt="S800 IO"><div class="product-info"><h4>DO821</h4><h4>3BSE013250R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-62.jpg')"><img src="assets/images/s800io-62.jpg" alt="S800 IO"><div class="product-info"><h4>DO828</h4><h4>3BSE069055R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-63.jpg')"><img src="assets/images/s800io-63.jpg" alt="S800 IO"><div class="product-info"><h4>DO840</h4><h4>3BSE020838R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-64.jpg')"><img src="assets/images/s800io-64.jpg" alt="S800 IO"><div class="product-info"><h4>DO880</h4><h4>3BSE028602R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-65.jpg')"><img src="assets/images/s800io-65.jpg" alt="S800 IO"><div class="product-info"><h4>DO890</h4><h4>3BSC690074R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-66.jpg')"><img src="assets/images/s800io-66.jpg" alt="S800 IO"><div class="product-info"><h4>DP820</h4><h4>3BSE013228R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-67.jpg')"><img src="assets/images/s800io-67.jpg" alt="S800 IO"><div class="product-info"><h4>DP840</h4><h4>3BSE028926R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-68.jpg')"><img src="assets/images/s800io-68.jpg" alt="S800 IO"><div class="product-info"><h4>TB805</h4><h4>3BSE008534R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-69.jpg')"><img src="assets/images/s800io-69.jpg" alt="S800 IO"><div class="product-info"><h4>TB806</h4><h4>3BSE008536R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-70.jpg')"><img src="assets/images/s800io-70.jpg" alt="S800 IO"><div class="product-info"><h4>TB807</h4><h4>3BSE008538R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-71.jpg')"><img src="assets/images/s800io-71.jpg" alt="S800 IO"><div class="product-info"><h4>TB845</h4><h4>3BSE021437R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-72.jpg')"><img src="assets/images/s800io-72.jpg" alt="S800 IO"><div class="product-info"><h4>TB846</h4><h4>3BSE021439R1</h4><p>Original ABB</p></div></div>
+
+<div class="product-item" onclick="openProductModal('assets/images/s800io-73.jpg')"><img src="assets/images/s800io-73.jpg" alt="S800 IO"><div class="product-info"><h4>TK801V003</h4><h4>3BSC950089R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-74.jpg')"><img src="assets/images/s800io-74.jpg" alt="S800 IO"><div class="product-info"><h4>TK801V006</h4><h4>3BSC950089R2</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-75.jpg')"><img src="assets/images/s800io-75.jpg" alt="S800 IO"><div class="product-info"><h4>TK801V012</h4><h4>3BSC950089R3</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-76.jpg')"><img src="assets/images/s800io-76.jpg" alt="S800 IO"><div class="product-info"><h4>TK811V015</h4><h4>3BSC950107R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-77.jpg')"><img src="assets/images/s800io-77.jpg" alt="S800 IO"><div class="product-info"><h4>TK811V050</h4><h4>3BSC950107R2</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-78.jpg')"><img src="assets/images/s800io-78.jpg" alt="S800 IO"><div class="product-info"><h4>TK811V150</h4><h4>3BSC950107R3</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-79.jpg')"><img src="assets/images/s800io-79.jpg" alt="S800 IO"><div class="product-info"><h4>TK812V015</h4><h4>3BSC950118R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-80.jpg')"><img src="assets/images/s800io-80.jpg" alt="S800 IO"><div class="product-info"><h4>TK812V050</h4><h4>3BSC950118R2</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-81.jpg')"><img src="assets/images/s800io-81.jpg" alt="S800 IO"><div class="product-info"><h4>TK812V150</h4><h4>3BSC950118R3</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-82.jpg')"><img src="assets/images/s800io-82.jpg" alt="S800 IO"><div class="product-info"><h4>TL810K01</h4><h4>3BSE088170R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-83.jpg')"><img src="assets/images/s800io-83.jpg" alt="S800 IO"><div class="product-info"><h4>TL811K01</h4><h4>3BSE088171R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-84.jpg')"><img src="assets/images/s800io-84.jpg" alt="S800 IO"><div class="product-info"><h4>TY801K01</h4><h4>3BSE023607R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-85.jpg')"><img src="assets/images/s800io-85.jpg" alt="S800 IO"><div class="product-info"><h4>TY804K01</h4><h4>3BSE033670R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-86.jpg')"><img src="assets/images/s800io-86.jpg" alt="S800 IO"><div class="product-info"><h4>TY805K01</h4><h4>3BSE081160R1</h4><p>Original ABB</p></div></div>
+<div class="product-item" onclick="openProductModal('assets/images/s800io-87.jpg')"><img src="assets/images/s800io-87.jpg" alt="S800 IO"><div class="product-info"><h4>TY820K01</h4><h4>3BSE056980R1</h4><p>Original ABB</p></div></div>
+
+            </div>
+        </div>
+
+        <div id="cat5" class="category">
+            <div class="product-grid">
+                <div class="product-item" onclick="openProductModal('assets/images/800f-1.jpg')"><img src="assets/images/800f-1.jpg" alt="800F"><div class="product-info"><h4>FI830F</h4><h4>3BDH000032R1</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/800f-2.jpg')"><img src="assets/images/800f-2.jpg" alt="800F"><div class="product-info"><h4>FI840F</h4><h4>3BDH000033R1</h4><p>Original ABB</p></div></div>
+            </div>
+        </div>
+
+        <div id="cat6" class="category">
+            <div class="product-grid">
+                <div class="product-item" onclick="openProductModal('assets/images/900f-1.jpg')"><img src="assets/images/900f-1.jpg" alt="900F"><div class="product-info"><h4>CI 773F</h4><h4>3BDH000395R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-2.jpg')"><img src="assets/images/900f-2.jpg" alt="900F"><div class="product-info"><h4>CI 910F</h4><h4>3BDH001005R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-3.jpg')"><img src="assets/images/900f-3.jpg" alt="900F"><div class="product-info"><h4>CI 930F</h4><h4>3BDH001010R0002</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-4.jpg')"><img src="assets/images/900f-4.jpg" alt="900F"><div class="product-info"><h4>CI 940F</h4><h4>3BDH001015R0001</h4><p>Original ABB</p></div></div>
+
+                <div class="product-item" onclick="openProductModal('assets/images/900f-5.jpg')"><img src="assets/images/900f-5.jpg" alt="900F"><div class="product-info"><h4>PM 901F</h4><h4>3BDH001001R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-6.jpg')"><img src="assets/images/900f-6.jpg" alt="900F"><div class="product-info"><h4>PM 902F</h4><h4>3BDH001000R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-7.jpg')"><img src="assets/images/900f-7.jpg" alt="900F"><div class="product-info"><h4>PM 904F</h4><h4>3BDH001002R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-8.jpg')"><img src="assets/images/900f-8.jpg" alt="900F"><div class="product-info"><h4>TA 924F</h4><h4>3BDH001031R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-9.jpg')"><img src="assets/images/900f-9.jpg" alt="900F"><div class="product-info"><h4>TA 951F</h4><h4>3BDH001030R0001</h4><p>Original ABB</p></div></div>
+                <div class="product-item" onclick="openProductModal('assets/images/900f-10.jpg')"><img src="assets/images/900f-10.jpg" alt="900F"><div class="product-info"><h4>TD 951F</h4><h4>3BDH001020R0001</h4><p>Original ABB</p></div></div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 产品图片模态框 -->
+<div id="productModal" class="modal">
+    <span class="close" onclick="closeProductModal()">&times;</span>
+    <div class="modal-content"><img id="modalImg" src="" alt="Product"></div>
+</div>
+
+<footer>
+    <p data-lang="copyright">© 2026 Tempe (beijing) Technology Co., Ltd. All Rights Reserved.</p>
+</footer>
+
+<script>
+    // 功能保留，样式已焕新
+    function show(id){
+        document.querySelectorAll('.category').forEach(c=>c.classList.remove('show'));
+        document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+        const el=document.getElementById(id);
+        const tab=document.querySelector(`.tab[onclick="show('${id}')"]`);
+        if(el)el.classList.add('show');
+        if(tab)tab.classList.add('active');
+        
+        const sideAC = document.getElementById('sidebarAC800M');
+        const sideS800 = document.getElementById('sidebarS800IO');
+        
+        sideAC.classList.remove('show');
+        sideS800.classList.remove('show');
+        
+        if(id === 'cat3'){
+            sideAC.classList.add('show');
+        }
+        if(id === 'cat4'){
+            sideS800.classList.add('show');
+        }
+        
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // 处理锚点
+    const hash=location.hash.replace('#','');
+    if(hash&&document.getElementById(hash)){
+        if(hash.startsWith('cat3-')){
+            show('cat3');
+        }else if(hash.startsWith('cat4-')){
+            show('cat4');
+        }else{
+            show(hash);
+        }
+    }
+
+    function openProductModal(src){
+        document.getElementById('productModal').style.display='flex';
+        document.getElementById('modalImg').src=src;
+    }
+    function closeProductModal(){
+        document.getElementById('productModal').style.display='none';
+    }
+    window.onclick=function(e){
+        if(e.target===document.getElementById('productModal'))closeProductModal()
+    }
+
+    // 语言数据 (保持原文字内容)
+    const lang={
+        en:{
+            logo:"Tempe (beijing) Technology Co., Ltd.",
+            home:"Home",
+            products:"Products",
+            certificates:"Certificates",
+            about:"About Us",
+            contact:"Contact",
+            allProducts:"All Products",
+            cat1:"PEC",
+            cat2:"MTU",
+            cat3:"AC 800M",
+            cat4:"S800 IO",
+            cat5:"800F",
+            cat6:"900F",
+            copyright:"© 2026 Tempe (beijing) Technology Co., Ltd. All Rights Reserved.",
+            quickNav:"Quick Navigation",
+            navControllers:"Controllers",
+            navInterfaces:"Interfaces",
+            navIOSystems:"I/O Systems",
+            titleControllers:"Controllers",
+            titleInterfaces:"Interfaces",
+            titleIOSystems:"I/O Systems"
+        },
+        zh:{
+            logo:"Tempe（北京）科技有限公司",
+            home:"首页",
+            products:"产品中心",
+            certificates:"资质证书",
+            about:"关于我们",
+            contact:"联系我们",
+            allProducts:"全部产品",
+            cat1:"PEC",
+            cat2:"MTU",
+            cat3:"AC 800M",
+            cat4:"S800 IO",
+            cat5:"800F",
+            cat6:"900F",
+            copyright:"© 2026 Tempe（北京）科技有限公司 版权所有",
+            quickNav:"快速导航",
+            navControllers:"控制器",
+            navInterfaces:"接口模块",
+            navIOSystems:"I/O系统",
+            titleControllers:"控制器",
+            titleInterfaces:"接口模块",
+            titleIOSystems:"I/O系统"
+        }
+    };
+
+    let current='en';
+    const btn=document.getElementById('langBtn');
+    btn.onclick=()=>{
+        current=current=='en'?'zh':'en';
+        btn.textContent=current=='en'?'中文':'English';
+        document.querySelectorAll('[data-lang]').forEach(e=>{
+            if(lang[current][e.dataset.lang])e.textContent=lang[current][e.dataset.lang];
+        });
+    };
+    // 初始化按钮文字
+    btn.textContent = '中文';
+</script>
+</body>
+</html>
