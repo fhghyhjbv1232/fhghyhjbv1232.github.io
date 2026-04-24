@@ -360,7 +360,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
             gap: 1.8rem;
-            margin: 2.5rem 0 5rem;
+            margin: 2.5rem 0 2rem;   /* 调整下边距为2rem，使About Us上间距与Hot Products一致 */
         }
 
         .category-item {
@@ -406,95 +406,6 @@
         .category-item p {
             font-size: 0.9rem;
             color: var(--text-muted);
-        }
-
-        /* ===== 证书区域 ===== */
-        .certificates {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-            justify-content: center;
-        }
-
-        .cert-card {
-            background: var(--card-white);
-            padding: 1.8rem 1.2rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid rgba(255,255,255,0.8);
-            max-width: 320px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .cert-card:hover {
-            transform: scale(1.02) translateY(-6px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-accent);
-        }
-
-        .cert-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            background: #fff;
-            margin-bottom: 1.2rem;
-            border-radius: 16px;
-            padding: 5px;
-        }
-
-        .cert-card p {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary-deep);
-        }
-
-        /* 模态框 */
-        .cert-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-            padding: 2rem;
-        }
-
-        .cert-modal img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border: 4px solid white;
-            border-radius: 24px;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
-            animation: zoomIn 0.25s ease;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 2rem;
-            right: 2.5rem;
-            color: white;
-            font-size: 3.2rem;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: var(--transition);
-            line-height: 1;
-        }
-
-        .close-modal:hover {
-            opacity: 1;
-            transform: scale(1.1);
-            color: var(--primary-accent-light);
         }
 
         /* ===== 关于我们 ===== */
@@ -562,11 +473,6 @@
             font-weight: 700;
             margin-right: 10px;
             letter-spacing: 0.3px;
-        }
-
-        /* 让About Us和Contact之间没有白缝 */
-        .container:has(#about) {
-            padding-bottom: 2rem;    /* 减少底部内边距，与深蓝区域更近 */
         }
 
         /* ===== 页脚 ===== */
@@ -641,13 +547,6 @@
                 font-size: 1.4rem;
             }
         }
-
-        /* 证书卡片居中 */
-        .certificates {
-            justify-items: center;
-        }
-
-        /* 保持所有文字内容不变 */
     </style>
 </head>
 <body>
@@ -659,7 +558,6 @@
             <a href="#home" data-lang="home">Home</a>
             <a href="#services" data-lang="services">Services</a>
             <a href="products.html" data-lang="products">Products</a>
-            <a href="#certificates" data-lang="certificates">Certificates</a>
             <a href="#about" data-lang="about">About Us</a>
             <a href="#contact" data-lang="contact">Contact</a>
             <button class="lang-switch" id="langSwitch">中文</button>
@@ -793,21 +691,7 @@
         </a>
     </div>
 
-    <h2 class="section-title" id="certificates" data-lang="certTitle">Our Certificates</h2>
-    <div class="certificates">
-        <div class="cert-card" onclick="openModal('assets/images/cert1.png')">
-            <img src="assets/images/cert1.png" alt="ABB Authorization">
-            <p data-lang="cert1">ABB Official Authorization</p>
-        </div>
-    </div>
-</div>
-
-<div class="cert-modal" id="certModal" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
-    <img id="modalImg" src="" alt="Certificate">
-</div>
-
-<div class="container">
+    <!-- About Us 移入同一容器 -->
     <h2 class="section-title" id="about" data-lang="aboutTitle">About Us</h2>
     <div class="about">
         <p data-lang="aboutDesc1">We focus on ABB Distributed Control System (DCS) products, spare parts, system upgrades, commissioning, and after-sales support. We have genuine ABB authorization, complete certification, and global delivery capability.</p>
@@ -839,7 +723,6 @@
             home: "Home",
             services: "Services",
             products: "Products",
-            certificates: "Certificates",
             about: "About Us",
             contact: "Contact",
             bannerTitle: "One-stop ABB DCS Solution Provider",
@@ -868,18 +751,12 @@
             desc800F: "Fieldbus communication interfaces",
             cat900F: "900F",
             desc900F: "Freelance distributed control systems",
-            certTitle: "Our Certificates",
-            cert1: "ABB Official Authorization",
-            cert2: "Quality Management System Certification",
-            cert3: "Import & Export License",
-            cert4: "Technical Service Qualification",
             aboutTitle: "About Us",
             aboutDesc1: "We focus on ABB Distributed Control System (DCS) products, spare parts, system upgrades, commissioning, and after-sales support. We have genuine ABB authorization, complete certification, and global delivery capability.",
             aboutDesc2: "Our technicians can provide you with professional technical consulting services and effective progressive upgrade and transformation solutions. We are committed to offering reliable products and high-quality services to global industrial customers.",
             contactTitle: "Contact Us",
             contactEmail: "<strong>Email:</strong> nancy.k@bjtempe.com",
             contactWhatsapp: "<strong>WhatsApp:</strong> +86 13986908900",
-
             contactAddress: "<strong>Address:</strong> No. 9 Courtyard, Huilongguan West Street, Changping District, Beijing",
             copyright: "&copy; 2026 Tempe (beijing) Technology Co., Ltd. All Rights Reserved."
         },
@@ -888,7 +765,6 @@
             home: "首页",
             services: "服务项目",
             products: "产品中心",
-            certificates: "资质证书",
             about: "关于我们",
             contact: "联系我们",
             bannerTitle: "一站式ABB DCS解决方案提供商",
@@ -917,18 +793,12 @@
             desc800F: "现场总线通信接口",
             cat900F: "900F",
             desc900F: "自由分布式控制系统",
-            certTitle: "资质证书",
-            cert1: "ABB官方授权证书",
-            cert2: "质量管理体系认证",
-            cert3: "进出口许可证",
-            cert4: "技术服务资质证书",
             aboutTitle: "关于我们",
             aboutDesc1: "我们专注于ABB分布式控制系统（DCS）产品、备件、系统升级、调试及售后服务，拥有ABB官方授权资质、完整的认证体系及全球配送能力。",
             aboutDesc2: "我们的技术团队可提供专业的技术咨询服务及高效的渐进式升级改造方案，致力于为全球工业客户提供可靠的产品和优质的服务。",
             contactTitle: "联系我们",
             contactEmail: "<strong>邮箱:</strong> nancy.k@bjtempe.com",
             contactWhatsapp: "<strong>WhatsApp:</strong> +86 13986908900",
-
             contactAddress: "<strong>地址:</strong> 北京市昌平区回龙观西大街9号院",
             copyright: "&copy; 2026 Tempe（北京）科技有限公司 保留所有权利。"
         }
@@ -956,22 +826,6 @@
         }
 
         updateLang();
-
-        window.openModal = function(imgSrc) {
-            const modal = document.getElementById('certModal');
-            const modalImg = document.getElementById('modalImg');
-            modal.style.display = 'flex';
-            modalImg.src = imgSrc;
-        }
-
-        window.closeModal = function() {
-            document.getElementById('certModal').style.display = 'none';
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('certModal');
-            if (event.target === modal) closeModal();
-        }
     });
 </script>
 </body>
